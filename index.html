@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>串口命令表</title>
+    <link href="styles/style.css" rel="stylesheet" type="text/css"/>
+    <link
+        href="https://fonts.googleapis.com/css?family=Open+Sans"
+        rel="stylesheet" />
+    <style>
+   </style>
+  </head>
+  <body>
+    <canvas id="line" style="display:none;"></canvas>
+    <div>
+    <table>
+        <caption>串口命令表</caption>
+        <thead>
+            <tr >
+                <th scope="col"> 发送者 </th>
+                <th scope="col"> 第一个字节 </th>
+                <th scope="col"> 第二个字节 </th>
+                <th scope="col"> 第三个字节 </th>
+                <th scope="col"> 第四个字节 </th>
+                <th scope="col"> 功能 </th>
+            </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <th rowspan="22" > 主机 </th>
+        </tr>
+        <tr >
+            <td> 0x3A </td>
+            <td> 0xA3 </td>
+            <td id="header"> </td>
+            <td id="header1"> </td>
+            <td> 关机 </td>
+        </tr>
+        <tr>
+            <td> 0x0F </td>
+            <td> 0xF0 </td>
+            <td id="header2"> </td>
+            <td id="header3"> </td>
+            <td> 重启 </td>
+        </tr>
+        <tr>
+            <td rowspan="4"> 0xF0(开启) </td>
+            <td> 0x00 </td>
+            <td id="header4"> </td>
+            <td id="header5"> </td>
+            <td> 开启蜂鸣器 </td>
+        </tr>
+        <tr>
+            <td> 0x01 </td>
+            <td id="header6"> </td>
+            <td id="header7"> </td>
+            <td> 开启泵 </td>
+        </tr>
+        <tr>
+            <td> 0x02 </td>
+            <td id="header8"> </td>
+            <td id="header9"> </td>
+            <td> 开启阀 </td>
+        </tr>
+        <tr>
+            <td> 0x03 -0x05 </td>
+            <td id="header10"> </td>
+            <td id="header11"> </td>
+            <td> 开启灯 </td>
+        </tr>
+        <tr>
+            <td rowspan="4"> 0xF1(关闭) </td>
+            <td> 0x00 </td>
+            <td id="header12"> </td>
+            <td id="header13"> </td>
+            <td> 关闭蜂鸣器 </td>
+        </tr>
+        <tr>
+            <td> 0x01 </td>
+            <td id="header14"> </td>
+            <td id="header15"> </td>
+            <td> 关闭泵 </td>
+        </tr>
+        <tr>
+            <td> 0x02 </td>
+            <td id="header16"> </td>
+            <td id="header17"> </td>
+            <td> 关闭阀 </td>
+        </tr>
+        <tr>
+            <td> 0x03 - 0x05 </td>
+            <td id="header18"> </td>
+            <td id="header19"> </td>
+            <td> 关闭灯 </td>
+        </tr>
+        <tr>
+            <td rowspan="6"> 0xF2(设置) </td>
+            <td > 0x00 </td>
+            <td colspan="2"> data </td>
+            <td> 设置最大压力(mmHg)</td>
+        </tr>
+        <tr>
+            <td > 0x01 </td>
+            <td colspan="2"> data </td>
+            <td> 设置最小压力(mmHg)</td>
+        </tr>
+        <tr>
+            <td > 0x02 </td>
+            <td colspan="2"> data </td>
+            <td> 设置加压时间(ms)</td>
+        </tr>
+        <tr>
+            <td > 0x03 </td>
+            <td colspan="2"> data </td>
+            <td> 设置减压时间(ms)</td>
+        </tr>
+        <tr>
+            <td> 0x04</td>
+            <td colspan="2"> data </td>
+            <td> 设置蜂鸣器频率(Hz)</td>
+        </tr>
+        <tr>
+            <td> 0x05</td>
+            <td colspan="2"> data </td>
+            <td> 设置泵转速</td>
+        </tr>
+        <tr>
+            <td rowspan="5"> 0xF3(运行) </td>
+            <td> 0x00</td>
+            <td id="header20"> </td> 
+            <td id="header21"> </td> 
+            <td> 开始运行</td>
+        </tr>
+        <tr>
+            <td> 0x01</td>
+            <td id="header22"> </td> 
+            <td id="header23"> </td> 
+            <td> 结束运行</td>
+        </tr>
+        <tr>
+            <td> 0x02</td>
+            <td id="header24"> </td> 
+            <td id="header25"> </td> 
+            <td> 暂停运行</td>
+        </tr>
+        <tr>
+            <td> 0x03</td>
+            <td id="header26"> </td> 
+            <td id="header27"> </td> 
+            <td> 继续运行</td>
+        </tr>
+        <tr>
+            <td> 0x04 - </td>
+            <td id="header28"> </td> 
+            <td id="header29"> </td> 
+            <td> 运行测试程序</td>
+        </tr>
+        <tr>
+            <th rowspan="7"> 从机 </th>
+            <td> 0xA0 </td>
+            <td> 0x0 - </td>
+            <td id="header30"> </td> 
+            <td id="header31"> </td> 
+            <td> 发送异常代码 </td>
+        </tr>
+        <tr>
+            <td> 0xA1 </td>
+            <td> 0x0 - </td>
+            <td id="header32"> </td>
+            <td id="header33"> </td>
+            <td> 发送状态代码 </td>
+        </tr>
+        <tr>
+            <td rowspan="4"> 0xA2</td>
+            <td> 0x00 </td>
+            <td> data </td>
+            <td> data </td>
+            <td> 发送泵转速</td>
+        </tr>
+        <tr>
+            <td> 0x01 </td>
+            <td> data </td>
+            <td> data </td>
+            <td> 发送气压值 </td>
+        </tr>
+        <tr>
+            <td> 0x02 </td>
+            <td> data </td>
+            <td> data </td>
+            <td> 发送温度值 </td>
+        </tr>
+        <tr>
+            <td> 0x03 </td>
+            <td> data </td>
+            <td> data </td>
+            <td> 发送电池电量 </td>
+        </tr>
+        <tr>
+            <td> 0xA3 </td>
+            <td> data </td>
+            <td> data </td>
+            <td> data </td>
+            <td> 发送脉搏数据 </td>
+        </tr>
+        
+    </tbody>
+    <tfoot>
+    </table>
+    </div>
+    <script src="scripts/main.js" defer></script>
+  </body>
+</html>
