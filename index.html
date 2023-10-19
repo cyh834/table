@@ -14,7 +14,7 @@
   <body>
     <canvas id="line" style="display:none;"></canvas>
     <div>
-    <table>
+    <table id="MyTable">
         <caption>串口命令表</caption>
         <thead>
             <tr >
@@ -24,20 +24,16 @@
                 <th scope="col"> 第三个字节 </th>
                 <th scope="col"> 第四个字节 </th>
                 <th scope="col"> 功能 </th>
-                <th scope="col"> 操作数  </th>
             </tr>
         </thead>
         <tbody>
         <tr>
             <th rowspan="23" > 主机 </th>
-        </tr>
-        <tr >
             <td> 0x96 </td>
             <td> 0x69 </td>
             <td id="header34"> </td>
             <td id="header35"> </td>
             <td> 开机 </td>
-            <td> 1</td>
         </tr>
         <tr >
             <td> 0x3A </td>
@@ -45,7 +41,6 @@
             <td id="header"> </td>
             <td id="header1"> </td>
             <td> 关机 </td>
-            <td> 2</td>
         </tr>
         <tr>
             <td> 0x0F </td>
@@ -53,7 +48,6 @@
             <td id="header2"> </td>
             <td id="header3"> </td>
             <td> 重启 </td>
-            <td> 3</td>
         </tr>
         <tr>
             <td rowspan="4"> 0xF0(开启) </td>
@@ -61,28 +55,24 @@
             <td id="header4"> </td>
             <td id="header5"> </td>
             <td> 开启蜂鸣器 </td>
-            <td> 4</td>
         </tr>
         <tr>
             <td> 0x01 </td>
             <td id="header6"> </td>
             <td id="header7"> </td>
             <td> 开启泵 </td>
-            <td> 5</td>
         </tr>
         <tr>
             <td> 0x02 </td>
             <td id="header8"> </td>
             <td id="header9"> </td>
             <td> 开启阀 </td>
-            <td> 6</td>
         </tr>
         <tr>
             <td> 0x03 -0x05 </td>
             <td id="header10"> </td>
             <td id="header11"> </td>
             <td> 开启灯 </td>
-            <td> 7</td>
         </tr>
         <tr>
             <td rowspan="4"> 0xF1(关闭) </td>
@@ -90,65 +80,60 @@
             <td id="header12"> </td>
             <td id="header13"> </td>
             <td> 关闭蜂鸣器 </td>
-            <td> 8</td>
         </tr>
         <tr>
             <td> 0x01 </td>
             <td id="header14"> </td>
             <td id="header15"> </td>
             <td> 关闭泵 </td>
-            <td> 9</td>
         </tr>
         <tr>
             <td> 0x02 </td>
             <td id="header16"> </td>
             <td id="header17"> </td>
             <td> 关闭阀 </td>
-            <td> 10</td>
         </tr>
         <tr>
             <td> 0x03 - 0x05 </td>
             <td id="header18"> </td>
             <td id="header19"> </td>
             <td> 关闭灯 </td>
-            <td> 11</td>
         </tr>
         <tr>
-            <td rowspan="6"> 0xF2(设置) </td>
+            <td rowspan="7"> 0xF2(设置) </td>
             <td > 0x00 </td>
             <td colspan="2"> data </td>
             <td> 设置最大压力(mmHg)</td>
-            <td> 12</td>
         </tr>
         <tr>
             <td > 0x01 </td>
             <td colspan="2"> data </td>
             <td> 设置最小压力(mmHg)</td>
-            <td> 13</td>
         </tr>
         <tr>
             <td > 0x02 </td>
             <td colspan="2"> data </td>
             <td> 设置加压时间(ms)</td>
-            <td> 14</td>
         </tr>
         <tr>
-            <td > 0x03 </td>
+            <td> 0x03 </td>
             <td colspan="2"> data </td>
-            <td> 设置减压时间(ms)</td>
-            <td> 15</td>
+            <td> 设置高压时间(ms)</td>
         </tr>
         <tr>
-            <td> 0x04</td>
+            <td > 0x04 </td>
             <td colspan="2"> data </td>
-            <td> 设置蜂鸣器频率(Hz)</td>
-            <td> 16</td>
+            <td> 设置低压时间(ms)</td>
         </tr>
         <tr>
             <td> 0x05</td>
             <td colspan="2"> data </td>
+            <td> 设置蜂鸣器频率(Hz)</td>
+        </tr>
+        <tr>
+            <td> 0x06</td>
+            <td colspan="2"> data </td>
             <td> 设置泵转速</td>
-            <td> 17</td>
         </tr>
         <tr>
             <td rowspan="5"> 0xF3(运行) </td>
@@ -156,35 +141,30 @@
             <td id="header20"> </td> 
             <td id="header21"> </td> 
             <td> 开始运行</td>
-            <td> 18</td>
         </tr>
         <tr>
             <td> 0x01</td>
             <td id="header22"> </td> 
             <td id="header23"> </td> 
             <td> 结束运行</td>
-            <td> 19</td>
         </tr>
         <tr>
             <td> 0x02</td>
             <td id="header24"> </td> 
             <td id="header25"> </td> 
             <td> 暂停运行</td>
-            <td> 20</td>
         </tr>
         <tr>
             <td> 0x03</td>
             <td id="header26"> </td> 
             <td id="header27"> </td> 
             <td> 继续运行</td>
-            <td> 21</td>
         </tr>
         <tr>
             <td> 0x04 - </td>
             <td id="header28"> </td> 
             <td id="header29"> </td> 
             <td> 运行测试程序</td>
-            <td> 22</td>
         </tr>
         <tr>
             <th rowspan="7"> 从机 </th>
@@ -193,7 +173,6 @@
             <td id="header30"> </td> 
             <td id="header31"> </td> 
             <td> 发送异常代码 </td>
-            <td> 23</td>
         </tr>
         <tr>
             <td> 0xA1 </td>
@@ -201,38 +180,32 @@
             <td id="header32"> </td>
             <td id="header33"> </td>
             <td> 发送状态代码 </td>
-            <td> 24</td>
         </tr>
         <tr>
             <td rowspan="4"> 0xA2</td>
             <td> 0x00 </td>
             <td colspan="2"> data </td>
             <td> 发送泵转速</td>
-            <td> 25</td>
         </tr>
         <tr>
             <td> 0x01 </td>
             <td colspan="2"> data </td>
             <td> 发送气压值 </td>
-            <td> 26</td>
         </tr>
         <tr>
             <td> 0x02 </td>
             <td colspan="2"> data </td>
             <td> 发送温度值 </td>
-            <td> 27</td>
         </tr>
         <tr>
             <td> 0x03 </td>
             <td colspan="2"> data </td>
             <td> 发送电池电量 </td>
-            <td> 28</td>
         </tr>
         <tr>
             <td> 0xA3 </td>
             <td colspan="3"> data </td>
             <td> 发送脉搏数据 </td>
-            <td> 29</td>
         </tr>
         
     </tbody>
