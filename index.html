@@ -28,12 +28,19 @@
         </thead>
         <tbody>
         <tr>
-            <th rowspan="21" > 主机 </th>
+            <th rowspan="23" > 主机 </th>
             <td> 0x0F </td>
             <td> 0xF0 </td>
             <td id="header2"> </td>
             <td id="header3"> </td>
             <td> 重启 </td>
+        </tr>
+        <tr>
+            <td > 0x3A </td>
+            <td > 0xA3 </td>
+            <td>       </td>
+            <td>       </td>
+            <td> 关机   </td>
         </tr>
         <tr>
             <td rowspan="4"> 0xF0(开启) </td>
@@ -153,7 +160,14 @@
             <td> 运行测试程序</td>
         </tr>
         <tr>
-            <th rowspan="7"> 从机 </th>
+            <td> 0x3F</td>
+            <td> 0xF3</td>
+            <td> </td>
+            <td> </td>
+            <td> 接收成功</td>
+        </tr>
+        <tr>
+            <th rowspan="8"> 从机 </th>
             <td> 0xA0 </td>
             <td> 0x0 - </td>
             <td id="header30"> </td> 
@@ -193,6 +207,14 @@
             <td colspan="3"> data </td>
             <td> 发送脉搏数据 </td>
         </tr>
+        <tr>
+            <td> 0x3F</td>
+            <td> 0xF3</td>
+            <td> </td>
+            <td> </td>
+            <td> 接收成功</td>
+        </tr>
+     
         
     </tbody>
     <tfoot>
